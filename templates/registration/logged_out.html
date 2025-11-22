@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5 d-flex flex-column align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-sm bg-dark text-light border-0" style="max-width: 380px; border-radius: 1.2rem;">
+        <div class="card-body text-center">
+            <h1 class="fw-bold mb-4 text-info" style="letter-spacing: 1px;">Logged out</h1>
+            <p class="mb-4 fs-5">You have been logged out.</p>
+            <a href="{% url 'login' %}" class="btn btn-info btn-lg px-4 fw-bold rounded-pill">
+                Login Again
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

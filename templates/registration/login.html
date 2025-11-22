@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
+    <div class="card shadow-sm bg-dark text-light border-0" style="max-width: 370px; border-radius: 1.1rem;">
+        <div class="card-body">
+            <h1 class="text-center mb-4 fw-bold text-info" style="letter-spacing:1px;">Login Form</h1>
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info w-100 py-2 fw-bold rounded-pill mt-2">Login</button>
+            </form>
+            <p class="text-center mt-4">
+                Don't have an account?
+                <a href="{% url 'register' %}" class="btn btn-link text-info p-0">Register First</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

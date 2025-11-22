@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Coffee aur Tweet
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5 fw-bold text-light" style="font-size: 3rem;">
+        Welcome {{ user.username }} to Tweet - Django Project
+    </h1>
+
+    <!-- Search bar -->
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-8">
+            <form class="d-flex" method="get" role="search">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search tweets..." aria-label="Search" value="{{ query|default_if_none:'' }}">
+                <button class="btn btn-warning" type="submit">Search</button>
+            </form>
+            {% if query %}
+                <p class="text-info mt-3">Showing results for "<strong>{{ query }}</strong>"</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class="btn btn-primary btn-lg" href="{% url 'tweet_create' %}">
+            <i class="bi bi-pencil-square me-2"></i> Create a tweet
+        </a>
+    </div>
+    <div class="row g-4 justify-content-center">
+        {% for tweet in tweets %}
+        <div class="col-md-5 col-lg-4">
+            <div class="card tweet-card shadow-lg border-3 bg-dark text-light position-relative">
+                {% if tweet.photo %}
+                <img src="{{ tweet.photo.url }}" class="card-img-top tweet-img" alt="tweet image">
+                {% endif %}
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle shadow-sm bg-primary text-white d-flex justify-content-center align-items-center me-2 avatar"
+                              style="width: 42px; height: 42px; font-size: 1.5rem;">
+                            {{ tweet.user.username|slice:":1"|upper }}
+                        </div>
+                        <span class="fw-bold text-info" style="font-size:1.1rem;">{{ tweet.user.username }}</span>
+                    </div>
+                    <p class="card-text mb-4">{{ tweet.text }}</p>
+                    <div class="d-flex justify-content-end gap-2">
+                    {% if tweet.user == user %}
+                        <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-outline-info btn-sm rounded-pill px-3">Edit</a>
+                        <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-outline-danger btn-sm rounded-pill px-3">Delete</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center text-warning fs-5 mt-5">
+            No tweets found.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

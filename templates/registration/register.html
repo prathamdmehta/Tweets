@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
+    <div class="card shadow-sm bg-dark text-light border-0" style="max-width: 410px; border-radius: 1.2rem;">
+        <div class="card-body">
+            <h1 class="text-center mb-4 fw-bold text-info" style="letter-spacing:1px;">Register Form</h1>
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-info w-100 py-2 fw-bold rounded-pill mt-2">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
